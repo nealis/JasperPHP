@@ -1,5 +1,5 @@
 {
-    "name": "fazo96/jasperphp",
+    "name": "nealis/jasperphp",
     "description": "Create Reports in PHP with JasperReports",
     "license": "MIT",
     "keywords": [
@@ -10,15 +10,14 @@
         "pdf",
         "java"
       ],
-    "homepage": "https://github.com/fazo96/JasperPHP",
     "authors": [
         {
             "name": "Hélder Duarte",
             "email": "cossou@gmail.com"
         },
         {
-            "name": "Enrico Fasoli",
-            "email": "enrico.fasoli1996@gmail.com"
+            "name": "Nealis",
+            "email": "info@nealis.it"
         }
     ],
     "autoload": {
