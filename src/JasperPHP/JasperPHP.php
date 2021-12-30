@@ -105,8 +105,14 @@ class JasperPHP
             }
         }
 
+        $db2 = false;
         if( count($db_connection) > 0 )
         {
+            if ($db_connection['driver'] == 'db2') {
+                $db_connection['driver'] = 'generic';
+                $db2 = true;
+            }
+
             $command .= " -t " . $db_connection['driver'];
 
             if( isset($db_connection['username']) && !empty($db_connection['username']) )
@@ -127,7 +133,7 @@ class JasperPHP
             if( isset($db_connection['jdbc_driver']) && !empty($db_connection['jdbc_driver']) )
                 $command .= " --db-driver " . $db_connection['jdbc_driver'];
 
-            if( isset($db_connection['jdbc_url']) && !empty($db_connection['jdbc_url']) )
+            if( isset($db_connection['jdbc_url']) && !empty($db_connection['jdbc_url'] && !$db2) )
                 $command .= " --db-url " . $db_connection['jdbc_url'];
 
             if ( isset($db_connection['jdbc_dir']) && !empty($db_connection['jdbc_dir']) )
@@ -147,6 +153,9 @@ class JasperPHP
         $this->redirect_output  = $redirect_output;
         $this->background       = $background;
         $this->the_command      = escapeshellcmd($command);
+
+        if (count($db_connection) > 0 && isset($db_connection['jdbc_url']) && !empty($db_connection['jdbc_url'] && $db2) )
+            $this->the_command .= " --db-url \"" . $db_connection['jdbc_url'] . "\"";
 
         return $this;
     }
